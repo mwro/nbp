@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,11 +29,6 @@ public class MainClass {
     }
 
     private static List<String> getCurrencyCodes() {
-        List<String> currencyCodes = new ArrayList<>();
-        currencyCodes.add("USD");
-        currencyCodes.add("EUR");
-        currencyCodes.add("CHF");
-        currencyCodes.add("GBP");
-        return currencyCodes;
+        return Arrays.asList("USD", "EUR", "CHF", "GBP");
     }
 }
