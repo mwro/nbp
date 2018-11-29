@@ -8,6 +8,10 @@ public class Rate {
     private BigDecimal bid;
     private BigDecimal ask;
 
+    public String getCode() {
+        return code;
+    }
+
     @Override
     public String toString() {
         return code + " = " + bid + "; " + ask;
