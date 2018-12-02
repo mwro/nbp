@@ -29,13 +29,13 @@ public class MainClass {
         }
 
         try {
-            processResponse(openConnection);
+            processConnection(openConnection);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void processResponse(HttpURLConnection openConnection) throws IOException {
+    private static void processConnection(HttpURLConnection openConnection) throws IOException {
         InputStream response;
         try {
             response = openConnection.getInputStream();
