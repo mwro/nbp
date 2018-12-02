@@ -1,6 +1,6 @@
 # nbp
 
-Java application displaying an array of exchange rates for currenecies USD, EUR, CHF, GBP, based on NBP (Polish National Bank) api.  
+Java 8 application displaying an array of exchange rates for currenecies USD, EUR, CHF, GBP, based on NBP (Polish National Bank) api.  
 For more details about nbp API, see http://api.nbp.pl/
 
 Pass the desired date in format "yyyy-MM-dd" as a program argument to show historical echange rates, e.g:  
@@ -15,3 +15,5 @@ USD = 3.5562; 3.6280
 EUR = 4.1943; 4.2791  
 CHF = 3.5902; 3.6628  
 GBP = 4.6916; 4.7864
+
+Used Gson library for response deserialization. To load required dependencies, please use Maven. 
