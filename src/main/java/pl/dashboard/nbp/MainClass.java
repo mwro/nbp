@@ -64,6 +64,10 @@ public class MainClass {
         return result.equals(arg);
     }
 
+    private static HttpURLConnection openHttpURLConnection(String url) throws IOException {
+        return (HttpURLConnection) new URL(url).openConnection();
+    }
+
     private static void processConnection(HttpURLConnection openConnection) throws IOException {
         InputStream response;
         try {
@@ -75,22 +79,18 @@ public class MainClass {
         processResponse(response);
     }
 
-    private static HttpURLConnection openHttpURLConnection(String url) throws IOException {
-        return (HttpURLConnection) new URL(url).openConnection();
-    }
-
     private static void processResponse(InputStream response) {
         Scanner scanner = new Scanner(response);
         String responseBody = scanner.useDelimiter("\\A").next();
         Gson gson = new Gson();
         ExchangeRatesTable[] exchangeRatesTables = gson.fromJson(responseBody, ExchangeRatesTable[].class);
 
-        List<String> currencyCodes = getCurrencyCodes();
+        List<String> currencyCodes = getCurrencyCodesForDisplay();
 
         System.out.print(exchangeRatesTables[0].toString(currencyCodes));
     }
 
-    private static List<String> getCurrencyCodes() {
+    private static List<String> getCurrencyCodesForDisplay() {
         return Arrays.asList("USD", "EUR", "CHF", "GBP");
     }
 }
