@@ -8,7 +8,7 @@ public class Rate {
     private BigDecimal bid;
     private BigDecimal ask;
 
-    public String getCode() {
+    String getCode() {
         return code;
     }
 

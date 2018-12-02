@@ -4,14 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class ExchangeRatesTable {
+class ExchangeRatesTable {
     private String table;
     private String no;
     private Date tradingDate;
     private Date effectiveDate;
     private Rate[] rates;
 
-    public String toString(List<String> currencyCodes) {
+    String toString(List<String> currencyCodes) {
         String dateString = getFormattedDate();
 
         StringBuilder sb = new StringBuilder()
