@@ -16,6 +16,11 @@ import java.util.Scanner;
 
 public class MainClass {
 
+    private static final String NBP_EXCHANGERATES_URL = "http://api.nbp.pl/api/exchangerates/tables/C/";
+    private static final String FORMAT_JSON_URL_PARAMETER = "?format=json";
+    private static final String STRICT_YMD_DATE_FORMAT = "uuuu-MM-dd";
+    private static final String DISPLAY_YMD_FORMAT = "yyyy-MM-dd";
+
     public static void main(String[] args) {
         String arg = "";
         if (args.length > 0)
@@ -30,7 +35,7 @@ public class MainClass {
             return;
         }
 
-        String url = "http://api.nbp.pl/api/exchangerates/tables/C/" + arg + "?format=json";
+        String url = NBP_EXCHANGERATES_URL + arg + FORMAT_JSON_URL_PARAMETER;
 
         HttpURLConnection openConnection;
         try {
@@ -46,17 +51,17 @@ public class MainClass {
             return true;
         }
 
-        DateTimeFormatter fomatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(STRICT_YMD_DATE_FORMAT)
                 .withResolverStyle(ResolverStyle.STRICT);
         LocalDate ld;
         try {
-            ld = LocalDate.parse(arg, fomatter);
+            ld = LocalDate.parse(arg, formatter);
         } catch (DateTimeParseException e) {
-            System.out.print(e.getMessage() + "\n" + "The proper argument is date in format \"yyyy-MM-dd\" or empty string.");
+            System.out.print(e.getMessage() + "\n" + "The proper argument is date in format \"" + DISPLAY_YMD_FORMAT + "\" or empty string.");
             return false;
         }
 
-        String result = ld.format(fomatter);
+        String result = ld.format(formatter);
         return result.equals(arg);
     }
 
