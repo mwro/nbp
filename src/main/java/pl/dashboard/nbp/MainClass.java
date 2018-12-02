@@ -17,14 +17,16 @@ import java.util.Scanner;
 public class MainClass {
 
     public static void main(String[] args) {
-        connectAndProcessResponse();
+        String arg = "";
+        if (args.length > 0)
+        {
+            arg = args[0];
+        }
+        connectAndProcessResponse(arg);
     }
 
-    private static void connectAndProcessResponse() {
-        String arg = "1991-07-04";
-
-        if (!isValidArgument(arg))
-        {
+    private static void connectAndProcessResponse(String arg) {
+        if (!isValidArgument(arg)) {
             return;
         }
 
@@ -49,8 +51,7 @@ public class MainClass {
         LocalDate ld;
         try {
             ld = LocalDate.parse(arg, fomatter);
-        } catch (DateTimeParseException e)
-        {
+        } catch (DateTimeParseException e) {
             System.out.print(e.getMessage() + "\n" + "The proper argument is date in format \"yyyy-MM-dd\" or empty string.");
             return false;
         }
