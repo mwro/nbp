@@ -10,8 +10,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class MainClass {
@@ -85,12 +83,6 @@ public class MainClass {
         Gson gson = new Gson();
         ExchangeRatesTable[] exchangeRatesTables = gson.fromJson(responseBody, ExchangeRatesTable[].class);
 
-        List<String> currencyCodes = getCurrencyCodesForDisplay();
-
-        System.out.print(exchangeRatesTables[0].toString(currencyCodes));
-    }
-
-    private static List<String> getCurrencyCodesForDisplay() {
-        return Arrays.asList("USD", "EUR", "CHF", "GBP");
+        System.out.print(exchangeRatesTables[0].toString());
     }
 }

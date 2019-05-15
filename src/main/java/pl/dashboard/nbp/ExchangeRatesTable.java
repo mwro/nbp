@@ -5,13 +5,16 @@ import java.util.Date;
 import java.util.List;
 
 class ExchangeRatesTable {
+    private static final List<String> CURRENCY_CODES_FOR_DISPLAY = List.of("USD", "EUR", "CHF", "GBP");
+
     private String table;
     private String no;
     private Date tradingDate;
     private Date effectiveDate;
     private Rate[] rates;
 
-    String toString(List<String> currencyCodes) {
+    @Override
+    public String toString() {
         String dateString = getFormattedDate();
 
         StringBuilder sb = new StringBuilder()
@@ -20,7 +23,7 @@ class ExchangeRatesTable {
 
         for (Rate rate : rates)
         {
-            if (!currencyCodes.contains(rate.getCode())) {
+            if (!CURRENCY_CODES_FOR_DISPLAY.contains(rate.getCode())) {
                 continue;
             }
             sb.append(rate.toString()).append("\n");
