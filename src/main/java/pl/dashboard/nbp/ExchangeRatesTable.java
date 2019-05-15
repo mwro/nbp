@@ -6,6 +6,7 @@ import java.util.List;
 
 class ExchangeRatesTable {
     private static final List<String> CURRENCY_CODES_FOR_DISPLAY = List.of("USD", "EUR", "CHF", "GBP");
+    private static final String DD_MM_YYYY = "dd.MM.yyyy";
 
     private String table;
     private String no;
@@ -33,7 +34,7 @@ class ExchangeRatesTable {
     }
 
     private String getFormattedDate() {
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat format = new SimpleDateFormat(DD_MM_YYYY);
         return format.format(effectiveDate);
     }
 }
