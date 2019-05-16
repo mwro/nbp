@@ -34,20 +34,19 @@ public class MainClass {
 
         String url = NBP_EXCHANGERATES_URL + arg + FORMAT_JSON_URL_PARAMETER;
 
-        HttpURLConnection openConnection;
+        HttpURLConnection connection;
         try {
-            openConnection = openHttpURLConnection(url);
+            connection = openHttpURLConnection(url);
         } catch (IOException e) {
             System.out.println("Error opening connection: " + e.getMessage());
             return;
         }
 
         try {
-            processConnection(openConnection);
+            printResponseFromConnection(connection);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private static boolean isValidArgument(String arg) {
@@ -73,18 +72,18 @@ public class MainClass {
         return (HttpURLConnection) new URL(url).openConnection();
     }
 
-    private static void processConnection(HttpURLConnection openConnection) throws IOException {
+    private static void printResponseFromConnection(HttpURLConnection connection) throws IOException {
         InputStream response;
         try {
-            response = openConnection.getInputStream();
+            response = connection.getInputStream();
         } catch (IOException e) {
-            System.out.print(openConnection.getResponseMessage());
+            System.out.print(connection.getResponseMessage());
             return;
         }
-        processResponse(response);
+        printResponse(response);
     }
 
-    private static void processResponse(InputStream response) {
+    private static void printResponse(InputStream response) {
         Scanner scanner = new Scanner(response);
         String responseBody = scanner.useDelimiter("\\A").next();
         Gson gson = new Gson();
