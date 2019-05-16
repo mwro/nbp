@@ -32,11 +32,9 @@ public class MainClass {
             return;
         }
 
-        String url = NBP_EXCHANGERATES_URL + arg + FORMAT_JSON_URL_PARAMETER;
-
         HttpURLConnection connection;
         try {
-            connection = openHttpURLConnection(url);
+            connection = openHttpURLConnection(getUrl(arg));
         } catch (IOException e) {
             System.out.println("Error opening connection: " + e.getMessage());
             return;
@@ -47,6 +45,10 @@ public class MainClass {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String getUrl(String arg) {
+        return NBP_EXCHANGERATES_URL + arg + FORMAT_JSON_URL_PARAMETER;
     }
 
     private static boolean isValidArgument(String arg) {
