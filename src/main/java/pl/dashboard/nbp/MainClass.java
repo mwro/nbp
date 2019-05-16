@@ -37,10 +37,17 @@ public class MainClass {
         HttpURLConnection openConnection;
         try {
             openConnection = openHttpURLConnection(url);
+        } catch (IOException e) {
+            System.out.println("Error opening connection: " + e.getMessage());
+            return;
+        }
+
+        try {
             processConnection(openConnection);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private static boolean isValidArgument(String arg) {
