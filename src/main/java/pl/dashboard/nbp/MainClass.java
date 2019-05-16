@@ -40,11 +40,7 @@ public class MainClass {
             return;
         }
 
-        try {
-            printResponseFromConnection(connection);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        printResponseFromConnection(connection);
     }
 
     private static String getUrl(String arg) {
@@ -74,23 +70,25 @@ public class MainClass {
         return (HttpURLConnection) new URL(url).openConnection();
     }
 
-    private static void printResponseFromConnection(HttpURLConnection connection) throws IOException {
-        InputStream response;
-        try {
-            response = connection.getInputStream();
+    private static void printResponseFromConnection(HttpURLConnection connection) {
+        try (final InputStream response = connection.getInputStream();
+             final Scanner scanner = new Scanner(response)) {
+
+            String responseBody = scanner.useDelimiter("\\A").next();
+            Gson gson = new Gson();
+            ExchangeRatesTable[] exchangeRatesTables = gson.fromJson(responseBody, ExchangeRatesTable[].class);
+
+            System.out.print(exchangeRatesTables[0].toString());
         } catch (IOException e) {
-            System.out.print(connection.getResponseMessage());
-            return;
+            printResponseMessage(connection);
         }
-        printResponse(response);
     }
 
-    private static void printResponse(InputStream response) {
-        Scanner scanner = new Scanner(response);
-        String responseBody = scanner.useDelimiter("\\A").next();
-        Gson gson = new Gson();
-        ExchangeRatesTable[] exchangeRatesTables = gson.fromJson(responseBody, ExchangeRatesTable[].class);
-
-        System.out.print(exchangeRatesTables[0].toString());
+    private static void printResponseMessage(HttpURLConnection connection) {
+        try {
+            System.out.println(connection.getResponseMessage());
+        } catch (IOException e) {
+            System.out.println("Error occurred connecting to the server: " + e.getMessage());
+        }
     }
 }
