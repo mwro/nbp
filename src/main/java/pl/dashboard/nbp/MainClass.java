@@ -75,13 +75,17 @@ public class MainClass {
              final Scanner scanner = new Scanner(response)) {
 
             String responseBody = scanner.useDelimiter("\\A").next();
-            Gson gson = new Gson();
-            ExchangeRatesTable[] exchangeRatesTables = gson.fromJson(responseBody, ExchangeRatesTable[].class);
+            ExchangeRatesTable[] exchangeRatesTables = getExchangeRatesTablesFromResponse(responseBody);
 
             System.out.print(exchangeRatesTables[0].toString());
         } catch (IOException e) {
             printResponseMessage(connection);
         }
+    }
+
+    private static ExchangeRatesTable[] getExchangeRatesTablesFromResponse(String responseBody) {
+        Gson gson = new Gson();
+        return gson.fromJson(responseBody, ExchangeRatesTable[].class);
     }
 
     private static void printResponseMessage(HttpURLConnection connection) {
