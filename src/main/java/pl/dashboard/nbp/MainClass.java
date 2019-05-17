@@ -1,6 +1,7 @@
 package pl.dashboard.nbp;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -84,7 +85,9 @@ public class MainClass {
     }
 
     private static ExchangeRatesTable[] getExchangeRatesTablesFromResponse(String responseBody) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateJsonDeserializer())
+                .create();
         return gson.fromJson(responseBody, ExchangeRatesTable[].class);
     }
 

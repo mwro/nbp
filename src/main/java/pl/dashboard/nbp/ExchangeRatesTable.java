@@ -1,17 +1,19 @@
 package pl.dashboard.nbp;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.List;
 
 class ExchangeRatesTable {
     private static final List<String> CURRENCY_CODES_FOR_DISPLAY = List.of("USD", "EUR", "CHF", "GBP");
-    private static final String DD_MM_YYYY = "dd.MM.yyyy";
+    private static final String EFFECTIVE_DATE_DISPLAY_FORMAT = "dd.MM.yyyy";
 
     private String table;
     private String no;
-    private Date tradingDate;
-    private Date effectiveDate;
+    private LocalDate tradingDate;
+    private LocalDate effectiveDate;
     private Rate[] rates;
 
     @Override
@@ -34,7 +36,9 @@ class ExchangeRatesTable {
     }
 
     private String getFormattedDate() {
-        SimpleDateFormat format = new SimpleDateFormat(DD_MM_YYYY);
-        return format.format(effectiveDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(EFFECTIVE_DATE_DISPLAY_FORMAT)
+                .withResolverStyle(ResolverStyle.STRICT);
+
+        return formatter.format(effectiveDate);
     }
 }
