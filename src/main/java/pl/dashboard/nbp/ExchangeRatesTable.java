@@ -17,7 +17,7 @@ class ExchangeRatesTable {
 
     @Override
     public String toString() {
-        String dateString = getFormattedDate();
+        String dateString = getStringFromEffectiveDate();
 
         StringBuilder sb = new StringBuilder()
                 .append("Data: ").append(dateString).append("\n")
@@ -34,7 +34,7 @@ class ExchangeRatesTable {
         return sb.toString();
     }
 
-    private String getFormattedDate() {
+    private String getStringFromEffectiveDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(EFFECTIVE_DATE_DISPLAY_FORMAT)
                 .withResolverStyle(ResolverStyle.STRICT);
 

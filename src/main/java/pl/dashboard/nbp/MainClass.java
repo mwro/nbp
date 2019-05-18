@@ -25,10 +25,10 @@ public class MainClass {
         if (args.length > 0) {
             arg = args[0];
         }
-        connectAndProcessResponse(arg);
+        connectAndPrintResponse(arg);
     }
 
-    private static void connectAndProcessResponse(String arg) {
+    private static void connectAndPrintResponse(String arg) {
         if (!isValidArgument(arg)) {
             return;
         }
@@ -41,7 +41,7 @@ public class MainClass {
             return;
         }
 
-        printResponseFromConnection(connection);
+        printResponse(connection);
     }
 
     private static String getUrl(String arg) {
@@ -68,7 +68,7 @@ public class MainClass {
         return (HttpURLConnection) new URL(url).openConnection();
     }
 
-    private static void printResponseFromConnection(HttpURLConnection connection) {
+    private static void printResponse(HttpURLConnection connection) {
         try (final InputStream response = connection.getInputStream();
              final Scanner scanner = new Scanner(response)) {
 
