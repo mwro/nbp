@@ -62,9 +62,7 @@ public class MainClass {
             System.out.print(e.getMessage() + "\n" + "The proper argument is date in format \"" + DISPLAY_YMD_FORMAT + "\" or empty string.");
             return false;
         }
-
-        String result = ld.format(formatter);
-        return result.equals(arg);
+        return true;
     }
 
     private static HttpURLConnection openHttpURLConnection(String url) throws IOException {
