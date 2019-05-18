@@ -55,9 +55,8 @@ public class MainClass {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(STRICT_YMD_DATE_FORMAT)
                 .withResolverStyle(ResolverStyle.STRICT);
-        LocalDate ld;
         try {
-            ld = LocalDate.parse(arg, formatter);
+            LocalDate.parse(arg, formatter);
         } catch (DateTimeParseException e) {
             System.out.print(e.getMessage() + "\n" + "The proper argument is date in format \"" + DISPLAY_YMD_FORMAT + "\" or empty string.");
             return false;
